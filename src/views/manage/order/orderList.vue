@@ -1,4 +1,4 @@
-<!-- 合同签订管理 -->
+<!-- 订单管理 -->
 <template>
    <div>
      <!-- 公共标题栏 -->
@@ -7,39 +7,42 @@
          <span>1</span>
          &nbsp; &nbsp; {{titleName}}
        </h1>
-       <div>
+       <!-- <div>
          <el-button type="primary" @click="addUser">新增</el-button>
          <el-button type="warning">批量删除</el-button>
-       </div>
+       </div> -->
      </div>
      <!-- 弹窗 -->
-     <el-dialog v-model="dialogFormVisible" title="文章内容新增" width="80%" top="8vh" class="popUp">
+     <!-- <el-dialog v-model="dialogFormVisible" title="内容新增" width="80%" top="8vh" class="popUp">
         <template #footer>
          <el-button type="primary" @click="addOk">确定</el-button>
          <el-button @click="addCancel">取消</el-button>
         </template>
-     </el-dialog>
+     </el-dialog> -->
      <!-- 搜索栏 -->
      <div id="searchBox">
        <el-row :gutter="20">
          <el-col :span="10"><div class="grid-content ep-bg-purple" />
            <div class="inputBox">
-             <span>租户名称:</span>
-             <el-input v-model="inputContent" placeholder="请输入文章标题" size="large" class="input"
-             prefix-icon="el-icon-search">
-             </el-input>
+             <span>订单编号:</span>
+             <el-input 
+              v-model="inputContent" 
+              placeholder="请输入订单编号" 
+              size="large" 
+              class="input" 
+              prefix-icon="el-icon-search"></el-input>
            </div>
          </el-col>
-         <el-col :span="6"><div class="grid-content ep-bg-purple" />
+         <!-- <el-col :span="6"><div class="grid-content ep-bg-purple" />
            <div class="selectBox">
-           <span>所属楼宇:</span>
+           <span>所属分类:</span>
              <el-select v-model="select" placeholder="请选择" style="width: 115px">
-               <el-option label="A1幢" value="1" />
-               <el-option label="B2幢" value="2" />
-               <el-option label="C2幢" value="3" />
+               <el-option label="凉菜" value="1" />
+               <el-option label="热菜" value="2" />
+               <el-option label="汤类" value="3" />
              </el-select>
            </div>
-         </el-col>
+         </el-col> -->
          <el-col :span="8"><div class="grid-content ep-bg-purple " />
            <div class="buttonBox">
              <el-button slot="append" type="success" @click="searchput">查询</el-button>
@@ -60,16 +63,16 @@
          border="true"
        >
          <el-table-column type="selection" width="55" />
-         <el-table-column label="租户名称" width="260">
-           <template #default="scope">{{ scope.row.companyName }}</template>
+         <el-table-column label="订单编号" width="100">
+           <template #default="scope">{{ scope.row.id }}</template>
          </el-table-column>
-         <el-table-column property="building" label="所属楼宇" width="100" />
-         <el-table-column property="room" label="房间名称" width="120" />
-         <el-table-column property="type" label="合同类型"  width="120"/>
-         <el-table-column property="state" label="合同状态"  width="120"/>
-         <el-table-column property="startTime" label="签约时间"  width="120"/>
-         <el-table-column property="endTime" label="到期时间"  width="140"/>
-         <el-table-column property="operate" label="操作" >
+         <el-table-column property="field_userId" label="订单用户" width="100" />
+         <el-table-column property="field_menuId" label="菜单" />
+         <el-table-column property="field_price" label="订单金额"  width="120"/>
+         <el-table-column property="field_intro" label="订单备注"  width="120"/>
+         <el-table-column property="field_state" label="订单状态"  width="120"/>
+         <el-table-column property="create_time" label="下单时间"  width="140"/>
+         <el-table-column property="operate" label="操作" width="160">
            <el-button text bg>详情</el-button>
            <el-button text bg>删除</el-button>
          </el-table-column>
@@ -86,7 +89,6 @@
              background="true"
              layout="prev, pager, next"
              :total="count"
- 
            />
        </div>
      </div>
@@ -106,8 +108,7 @@
    data () {
      return {
        dialogFormVisible:false,
-       titleName:"合同签订管理",
-       tableName:"我麻了",
+       titleName:"订单管理",
        currentPage: 1,
        pageSize: 6,
        searchContent:'',

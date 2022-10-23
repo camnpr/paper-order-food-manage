@@ -60,14 +60,14 @@ const logout = () => {
   flex-grow: 0.6;
 }
 
-::v-deep.el-menu {
+:deep(.el-menu) {
   height: 46px;
   border-bottom: none;
 }
-::v-deep.el-menu-item {
+:deep(.el-menu-item) {
   font-size: 10px;
 }
-::v-deep.el-icon {
+:deep(.el-icon) {
  position: relative;
  font-size: 24px;
  color: rgb(255, 255, 255);

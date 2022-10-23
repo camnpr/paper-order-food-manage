@@ -32,6 +32,10 @@ const manageroutes = [
                },
                //菜单管理
                {
+                  path: '/menuClass',
+                  component: () => import('../views/manage/menu/menuClass.vue')
+               },
+               {
                   path: '/menuList',
                   component: () => import('../views/manage/menu/menuList.vue')
                },

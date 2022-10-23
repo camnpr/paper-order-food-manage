@@ -38,7 +38,7 @@ const value = ref('')
   height: 100%;
 }
 
-::v-deep.el-header {
+:deep(.el-header) {
   padding: 0;
   height: 46px;
 }

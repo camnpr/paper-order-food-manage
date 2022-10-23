@@ -85,7 +85,6 @@ const goLogin = () => {
     url: "/api/login",
     data: parms
   }).then(data => {
-    console.log("后台返回的结果", data);
     if (data.data.code == 0) {
       ElMessage.error(data.data.msg);
     } else if (data.data.code == 1) {

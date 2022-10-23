@@ -88,23 +88,22 @@
   </div>
 </template>
 
-<script lang="ts" >
-  import { ref,onMounted, reactive } from 'vue'
-  import { ElTable } from 'element-plus'
-  import { getArticle ,cancelArticle } from "../../../api/operation.js"
-  import { useRouter } from "vue-router";
-  const $router = useRouter();
-  interface User {
+<script lang="ts">
+import { ref, onMounted, reactive } from 'vue'
+import { ElTable } from 'element-plus'
+import { getArticle ,cancelArticle } from "../../../api/manage.js"
+import { useRouter } from "vue-router";
+const $router = useRouter();
+interface User {
   date: string
   name: string
   address: string
 }
-  export default {
+export default {
   data () {
     return {
       dialogFormVisible:false,
-      titleName:"文章管理",
-      tableName:"我麻了",
+      titleName:"菜单管理",
       currentPage: 1,
       pageSize: 6,
       searchContent:'',
@@ -116,61 +115,57 @@
     };
   },
   setup(){
-// 访客列表数据
-const tableData1 = reactive([])
-// 访客列表总数
-let count1 = 0
+    // 访客列表数据
+    const tableData1 = reactive([])
+    // 访客列表总数
+    let count1 = 0
 
-// 获取访客需要的参数
-let getVisitorParms = {
-  pageNum: '1',   // 获取第几页的数据
-  pageSize: '20'   // 获取几条数据
-}
+    // 获取访客需要的参数
+    let getVisitorParms = {
+      pageNum: '1',   // 获取第几页的数据
+      pageSize: '20'   // 获取几条数据
+    }
 
-onMounted(() => {
-  // 调用获取访客的函数
-  getArticleData()
-})
-// 获取访客的异步函数
-async function getArticleData() {
-  // 发送请求 接受请求回来的数据 并且重命名为 res
-  const { data: res } = await getArticle(getVisitorParms)
-  // 返回的数据展开 push到数组中
-  tableData1.push(...res.data)
-  // 总数重新赋值
-  count1 = res.count
-  console.log(tableData1);
-  console.log(res.data)
-  
-}
-  return{
-    tableData1
-  }
+    onMounted(() => {
+      // 调用获取访客的函数
+      getArticleData()
+    })
+    // 获取访客的异步函数
+    async function getArticleData() {
+      // 发送请求 接受请求回来的数据 并且重命名为 res
+      const { data: res } = await getArticle(getVisitorParms)
+      // 返回的数据展开 push到数组中
+      tableData1.push(...res.data)
+      // 总数重新赋值
+      count1 = res.count
+    }
+    return{
+      tableData1
+    }
   },
   components: {},
-
   computed: {
     tables() {
-              const search = this.searchContent;
-           	  if(this.inputContent==''){
-           		this.searchContent=''
-           		this.currentPage=1
-           	  return [this. tableData1,this.count=this. tableData1.length];
-           	  }
-                 if (search!=='') {
-                   return [this. tableData1.filter((dataNews) => {
-                     return Object.keys(dataNews).some((key) => {
-                       return String(dataNews[key]).toLowerCase().indexOf(search) > -1;
-                     });
-                   }),
-           				this.count = this. tableData1.filter((dataNews) => {
-                     return Object.keys(dataNews).some((key) => {
-                       return String(dataNews[key]).toLowerCase().indexOf(search) > -1;
-                     });
-                   }).length];
-                 }
-                 return [this. tableData1,this.count=this. tableData1.length];
-           	}
+      const search = this.searchContent;
+      if (this.inputContent=='') {
+        this.searchContent=''
+        this.currentPage=1
+        return [this. tableData1,this.count=this. tableData1.length];
+      }
+      if (search!=='') {
+        return [this. tableData1.filter((dataNews) => {
+          return Object.keys(dataNews).some((key) => {
+            return String(dataNews[key]).toLowerCase().indexOf(search) > -1;
+          });
+        }),
+        this.count = this. tableData1.filter((dataNews) => {
+          return Object.keys(dataNews).some((key) => {
+            return String(dataNews[key]).toLowerCase().indexOf(search) > -1;
+          });
+        }).length];
+      }
+      return [this. tableData1,this.count=this. tableData1.length];
+    }
   },
   methods: {
     // addUser(){
@@ -205,13 +200,12 @@ async function getArticleData() {
       console.log(pk);
       mycancel()
       async function mycancel() {
-  // 发送请求 接受请求回来的数据 并且重命名为 res
-  const { data: res } = await cancelArticle(pk)
-  console.log(res)
-  console.log(111)
-  location.reload()
-}
-     
+        // 发送请求 接受请求回来的数据 并且重命名为 res
+        const { data: res } = await cancelArticle(pk)
+        console.log(res)
+        console.log(111)
+        location.reload()
+      }
     }
   }
 }

@@ -87,7 +87,7 @@
 <script lang="ts" >
   import { ref,onMounted, reactive } from 'vue'
   import { ElTable } from 'element-plus'
-  import { getArticle ,cancelArticle } from "../../../api/operation.js"
+  import { getArticle ,cancelArticle } from "../../../api/manage.js"
   import { useRouter } from "vue-router";
   const $router = useRouter();
   interface User {

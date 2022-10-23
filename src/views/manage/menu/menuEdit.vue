@@ -63,7 +63,7 @@
   import { reactive, ref } from "@vue/reactivity";
   import { ElMessageBox } from "element-plus";
   import { useRouter } from "vue-router";
-  import { addArticle } from "../../../api/operation.js"
+  import { addArticle } from "../../../api/manage.js"
   const $router = useRouter();
   //左侧数据
   const FormData = reactive({

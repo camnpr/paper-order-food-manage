@@ -57,12 +57,6 @@
   </div>
 </template>
 <script lang="ts">
-import {
-  Document,
-  Menu as IconMenu,
-  Location,
-  Setting,
-} from '@element-plus/icons-vue'
 import { reactive } from "@vue/reactivity";
 
 // 页面左侧菜单数据
@@ -74,8 +68,9 @@ export default{
       id: 2,
       authName: "菜单中心",
       children: [
-        { id: 201, authName: "菜单发布管理", path: "/menuList" },
-        { id: 202, authName: "菜单评论管理", path: "/menuComment" },
+        { id: 201, authName: "菜单分类管理", path: "/menuClass" },
+        { id: 202, authName: "菜单管理", path: "/menuList" },
+        { id: 203, authName: "菜单评论管理", path: "/menuComment" },
       ],
     },
     {
